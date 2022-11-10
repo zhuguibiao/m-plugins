@@ -186,7 +186,7 @@ function qianqian(packages) {
     return {
         platform: '赞美诗网',
         version: '0.0.1',
-        srcUrl: 'https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js',
+        srcUrl: 'https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/zmsw.js',
         cacheControl: 'no-cache',
         async search(query, page, type) {
             if (type === 'music') {
