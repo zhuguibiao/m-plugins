@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    {
+      "name": "赞美诗网",
+      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/zmsw.js"
+    },
+    {
+      "name": "诗歌本",
+      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js"
+    }
+  ]
+}
