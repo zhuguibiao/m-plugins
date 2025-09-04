@@ -2,11 +2,18 @@
   "plugins": [
     {
       "name": "赞美诗网",
-      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/zmsw.js"
+      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/zmsw.js",
+      "version": "0.0.1"
     },
     {
       "name": "诗歌本",
-      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js"
+      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js",
+      "version": "0.0.1"
+    },
+    {
+      "name": "b站-ios",
+      "url": "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/bilibili.js",
+      "version": "0.0.1"
     }
   ]
 }
