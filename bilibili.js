@@ -153,7 +153,7 @@ function formatMedia(result) {
     alias: title.match(/《(.+?)》/)?.[1],
     album: result.bvid ?? result.aid,
     artwork: result.pic?.startsWith("//")
-      ? "http:".concat(result.pic)
+      ? "https:".concat(result.pic)
       : result.pic,
     // description: result.description,
     duration: durationToSec(result.duration),
@@ -355,7 +355,6 @@ async function getArtistWorks(artistItem, page, type) {
       },
     })
   ).data;
-  console.log(res);
 
   const resultData = res.data;
   const albums = resultData.list.vlist.map(formatMedia);
@@ -395,7 +394,6 @@ async function getMediaSource(musicItem, quality) {
   ).data;
   let url;
 
-  console.log(res.data);
   if (res.data.dash) {
     const audios = res.data.dash.audio;
     audios.sort((a, b) => a.bandwidth - b.bandwidth);
