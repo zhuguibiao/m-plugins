@@ -1,18 +1,6 @@
 const axios = require("axios");
-const dayjs = require("dayjs");
 const CryptoJs = require("crypto-js");
 
-const headers = {
-  "user-agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36",
-  referer: "https://12180.net/",
-  // 'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
-  // 'sec-ch-ua-mobile': '?0',
-  // 'sec-ch-ua-platform': "macOS",
-  // 'sec-fetch-dest': 'video',
-  // 'sec-fetch-mode': 'no-cors',
-  // 'sec-fetch-site': ' cross-site',
-};
 function generateCode(id) {
   const now = Math.floor(Date.now() / 1000);
   const baseTime = Math.floor(
@@ -34,13 +22,13 @@ const searchHeaders = {
   "content-type": "application/json",
   token: "f2ebaad3810335e3134f7e58d2a9722d",
   // timestamp: Math.floor(Date.now() / 1000),
-  timestamp: '1756977474168',
+  timestamp: "1756977474168",
   // 'cookie':'security_session_verify=e63cf7e0282b2f7f8a7eb24a6bc69548',
 };
 
 function formatMusicItem(_) {
-   const { timestamp, code } = generateCode(_.id);
-      
+  const { timestamp, code } = generateCode(_.id);
+  const { timestamp: mt, code: mc } = generateCode(_.gId);
   return {
     id: _.id,
     songId: _.gId,
@@ -50,7 +38,7 @@ function formatMusicItem(_) {
     artistItems: [],
     album: "诗歌本", //专辑
     lrc: "",
-    url: "",
+    url: `https://11.400400.icu:9003/api/download/music?id=${_.gId}&timestamp=${mt}&code=${mc}`,
   };
 }
 
@@ -90,9 +78,11 @@ async function getLyric(musicItem) {
 module.exports = {
   platform: "诗歌本",
   version: "0.0.1",
-  srcUrl: "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js",
+  srcUrl:
+    "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js",
   author: "zgb",
   cacheControl: "no-cache",
+  supportedSearchType: ["music"],
   async search(query, page, type) {
     if (type === "music") {
       return await searchMusic(query, page);
@@ -100,22 +90,13 @@ module.exports = {
   },
   async getMediaSource(musicItem) {
     if (musicItem.songId) {
-      const { timestamp: musicTimestamp, code: musicCode } = generateCode(
-        musicItem.songId
-      );
-      const { timestamp, code } = generateCode(musicItem.id);
+      const { timestamp, code } = generateCode(musicItem.songId);
       return {
-        url: `https://11.400400.icu:9003/api/download/music?id=${musicItem.songId}&timestamp=${musicTimestamp}&code=${musicCode}`,
-        artwork: `https://11.400400.icu:9003/api/download/image?id=${musicItem.id}&timestamp=${timestamp}&code=${code}`,
-        artist:'',
-        duration: 200,
-        headers,
+        url: `https://11.400400.icu:9003/api/download/music?id=${musicItem.songId}&timestamp=${timestamp}&code=${code}`,
       };
     } else {
       return {
         url: musicItem.url,
-        artwork: "",
-        headers,
       };
     }
   },
