@@ -154,6 +154,8 @@ function formatMedia(result) {
     album: result.bvid ?? result.aid,
     artwork: result.pic?.startsWith("//")
       ? "https:".concat(result.pic)
+      : result.pic?.startsWith("http")
+      ? result.pic.replace("http", "https")
       : result.pic,
     // description: result.description,
     duration: durationToSec(result.duration),
@@ -565,12 +567,15 @@ async function getTopLists() {
 }
 
 async function getTopListDetail(topListItem) {
+  await getCookie();
   const res = await axios.get(
     `https://api.bilibili.com/x/web-interface/${topListItem.id}`,
     {
       headers: {
-        ...headers,
-        referer: "https://www.bilibili.com/",
+        // ...headers,
+        // referer: "https://www.bilibili.com/",
+        "User-Agent": "Mozilla/5.0",        
+        cookie: `buvid3=${cookie.b_3};buvid4=${cookie.b_4}`,
       },
     }
   );
@@ -668,7 +673,7 @@ async function getMusicComments(musicItem) {
 module.exports = {
   platform: "b站-ios",
   appVersion: ">=0.0",
-  version: "0.0.1",
+  version: "0.0.2",
   author: "zgb",
   cacheControl: "no-cache",
   srcUrl:
