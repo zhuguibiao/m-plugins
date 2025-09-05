@@ -31,7 +31,7 @@ function formatAlbumItem(_) {
     title: _.mTitle,
     artwork: _.mPicBig || _.mPicSmall,
     description: _.mInfo,
-    date: dayjs(_.mPulishTime).format("YYYY-MM-DD"),
+    date: _.mPublishTime,
   };
 }
 
@@ -63,7 +63,6 @@ async function searchBase(query, page, type) {
       bduss: "",
     },
   });
-  console.log(res)
   return res;
 }
 
@@ -188,10 +187,11 @@ async function getMusicInfo(musicItem) {
 }
 module.exports = {
   platform: "赞美诗网",
-  version: "0.0.1",
+  version: "0.0.2",
   srcUrl: "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/zmsw.js",
   cacheControl: "no-cache",
   author: "zgb",
+  supportedSearchType: ["music", "album", "artist"],
   async search(query, page, type) {
     if (type === "music") {
       return await searchMusic(query, page);
@@ -214,11 +214,10 @@ module.exports = {
     });
     return {
       url: res.data.mFileLink || musicItem.url,
-      artwork: res.data.mPicBig || res.data.mPicSmall || "",
     };
   },
   getAlbumInfo,
   getLyric,
   getArtistWorks,
-  // getMusicInfo
+  // getMusicInfo,
 };
