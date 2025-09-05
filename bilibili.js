@@ -677,7 +677,7 @@ module.exports = {
   author: "zgb",
   cacheControl: "no-cache",
   srcUrl:
-    "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/shigeben.js",
+    "https://raw.githubusercontent.com/zhuguibiao/m-plugins/main/bilibili.js",
   primaryKey: ["id", "aid", "bvid", "cid"],
   hints: {
     importMusicSheet: [
